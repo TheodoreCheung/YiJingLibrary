@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/YiJingLibrary.Core/YiJingLibrary.Core.csproj" />
+    <Project Path="src/YiJingLibrary.ChineseLunarCalendar/YiJingLibrary.ChineseLunarCalendar.csproj" />
+    <Project Path="src/YiJingLibrary.SixLines/YiJingLibrary.SixLines.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/SixLines.Test/SixLines.Test.csproj" />
+    <Project Path="test/YiJingLibrary.Test/YiJingLibrary.Test.csproj" />
+  </Folder>
+</Solution>

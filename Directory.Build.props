@@ -1,0 +1,36 @@
+<Project>
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Version>1.0.0</Version>
+        <Authors>Theodore Cheung</Authors>
+        <Product>Yi Jing Libraries</Product>
+        <Copyright>Copyright © 2025 Theodore Cheung</Copyright>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/TheodoreCheung/YiJingLibrary</RepositoryUrl>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageOutputPath>$(MSBuildThisFileDirectory)nupkgs</PackageOutputPath>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PackageIcon>icon.png</PackageIcon>
+        <Description>YiJingLibrary is a comprehensive .NET 10.0 library for Chinese metaphysics calculations, specifically focusing on Yi Jing (I Ching) divination. The library is composed of three main projects that work together to provide a complete solution for Yi Jing practitioners and researchers.</Description>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageTags>Yi Jing;Six Line;易经;六爻</PackageTags>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <DocumentationFile>$(MSBuildThisFileDirectory)documents/$(MSBuildProjectName).xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="$(MSBuildThisFileDirectory)icon.png" Pack="true" PackagePath="icon.png"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="\"/>
+        <None Include="$(MSBuildThisFileDirectory)README_zh.md" Pack="true" PackagePath="\"/>
+        <None Include="$(MSBuildThisFileDirectory)Directory.Build.props" Pack="true" PackagePath="\"/>
+    </ItemGroup>
+</Project>

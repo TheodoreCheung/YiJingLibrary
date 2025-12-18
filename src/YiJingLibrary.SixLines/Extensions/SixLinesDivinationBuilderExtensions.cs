@@ -149,7 +149,7 @@ public static class SixLinesDivinationBuilderExtensions
                 var worldly = (byte)(i > 3 ? i : i + 1);
                 hexagram[worldly].Position = Position.Worldly;
 
-                var corresponding = (byte)(worldly >= 4 ? worldly - 2 : worldly + 2);
+                var corresponding = (byte)(worldly >= 4 ? worldly - 3 : worldly + 3);
                 hexagram[corresponding].Position = Position.Corresponding;
 
                 return;

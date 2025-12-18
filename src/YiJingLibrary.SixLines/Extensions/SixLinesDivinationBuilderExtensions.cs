@@ -84,9 +84,6 @@ public static class SixLinesDivinationBuilderExtensions
         /// <returns></returns>
         public SixLinesDivination AssignFourSymbols()
         {
-            if (sixLinesDivination.Changed is null)
-                return sixLinesDivination;
-
             AssignFourSymbols(sixLinesDivination.Original, sixLinesDivination.Changed);
 
             return sixLinesDivination;
@@ -408,18 +405,15 @@ public static class SixLinesDivinationBuilderExtensions
         /// </summary>
         /// <param name="original"></param>
         /// <param name="changed"></param>
-        private static void AssignFourSymbols(Hexagram original, Hexagram changed)
+        private static void AssignFourSymbols(Hexagram original, Hexagram? changed)
         {
             for (byte i = 1; i <= 6; i++)
             {
                 var originalYinYang = original[i].YinYang
                                       ?? throw new InvalidDataException(
                                           "Cannot assign four symbols before assigning yin-yang.");
-                var changedYinYang = changed[i].YinYang
-                                     ?? throw new InvalidDataException(
-                                         "Cannot assign four symbols before assigning yin-yang.");
 
-                if (originalYinYang.Equals(changedYinYang))
+                if (changed is null || originalYinYang.Equals(changed[i].YinYang))
                 {
                     original[i].FourSymbol = originalYinYang.Equals(YinYang.Yang)
                         ? FourSymbol.YoungYang

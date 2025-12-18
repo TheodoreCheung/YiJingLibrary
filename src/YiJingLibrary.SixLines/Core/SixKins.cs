@@ -33,7 +33,7 @@ public sealed class SixKin(byte value, string label) : YiJingElement(value, labe
     /// <summary>
     /// 子孙
     /// </summary>
-    public static readonly SixKin Offspring = new(5, nameof(Officer));
+    public static readonly SixKin Offspring = new(5, nameof(Offspring));
 
     /// <summary>
     /// 所有六亲元素

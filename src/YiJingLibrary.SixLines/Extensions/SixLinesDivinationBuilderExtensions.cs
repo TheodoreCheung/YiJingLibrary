@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using YiJingLibrary.Core;
@@ -246,52 +247,8 @@ public static class SixLinesDivinationBuilderExtensions
         /// <exception cref="InvalidDataException"></exception>
         private static void AssignSixSpirits(Hexagram original, LunarStemBranch lunarStemBranch)
         {
-            var sortedSixSpirits = new List<SixSpirit>
-            {
-                SixSpirit.AzureDragon,
-                SixSpirit.VermilionBird,
-                SixSpirit.HookChen,
-                SixSpirit.CoiledSnake,
-                SixSpirit.WhiteTiger,
-                SixSpirit.BlackTortoise
-            };
-
-            int index;
-
-            if (lunarStemBranch.Day.HeavenlyStem.Equals(HeavenlyStem.Jia) ||
-                lunarStemBranch.Day.HeavenlyStem.Equals(HeavenlyStem.Yi))
-            {
-                index = 0;
-            }
-            else if (lunarStemBranch.Day.HeavenlyStem.Equals(HeavenlyStem.Bing) ||
-                     lunarStemBranch.Day.HeavenlyStem.Equals(HeavenlyStem.Ding))
-            {
-                index = 1;
-            }
-            else if (lunarStemBranch.Day.HeavenlyStem.Equals(HeavenlyStem.Wu))
-            {
-                index = 2;
-            }
-            else if (lunarStemBranch.Day.HeavenlyStem.Equals(HeavenlyStem.Ji))
-            {
-                index = 3;
-            }
-            else if (lunarStemBranch.Day.HeavenlyStem.Equals(HeavenlyStem.Geng) ||
-                     lunarStemBranch.Day.HeavenlyStem.Equals(HeavenlyStem.Xin))
-            {
-                index = 4;
-            }
-            else if (lunarStemBranch.Day.HeavenlyStem.Equals(HeavenlyStem.Ren) ||
-                     lunarStemBranch.Day.HeavenlyStem.Equals(HeavenlyStem.Gui))
-            {
-                index = 5;
-            }
-            else
-            {
-                throw new InvalidDataException("Invalid lunarDate");
-            }
-
-            var sixSpirits = sortedSixSpirits[index..].Concat(sortedSixSpirits[..index]).ToArray();
+            var index = StemToSpiritIndex[lunarStemBranch.Day.HeavenlyStem];
+            var sixSpirits = SixSpiritSequence[index..].Concat(SixSpiritSequence[..index]).ToArray();
 
             for (byte i = 0; i < 6; i++)
             {
@@ -354,4 +311,30 @@ public static class SixLinesDivinationBuilderExtensions
             ]);
         }
     }
+    
+    /// <summary>
+    /// 六神序列。
+    /// </summary>
+    private static readonly ImmutableArray<SixSpirit> SixSpiritSequence =
+    [
+        SixSpirit.AzureDragon,
+        SixSpirit.VermilionBird,
+        SixSpirit.HookChen,
+        SixSpirit.CoiledSnake,
+        SixSpirit.WhiteTiger,
+        SixSpirit.BlackTortoise
+    ];
+    
+    /// <summary>
+    /// 六神索引。
+    /// </summary>
+    private static readonly Dictionary<HeavenlyStem, int> StemToSpiritIndex = new()
+    {
+        { HeavenlyStem.Jia, 0 }, { HeavenlyStem.Yi, 0 },
+        { HeavenlyStem.Bing, 1 }, { HeavenlyStem.Ding, 1 },
+        { HeavenlyStem.Wu, 2 },
+        { HeavenlyStem.Ji, 3 },
+        { HeavenlyStem.Geng, 4 }, { HeavenlyStem.Xin, 4 },
+        { HeavenlyStem.Ren, 5 }, { HeavenlyStem.Gui, 5 }
+    };
 }

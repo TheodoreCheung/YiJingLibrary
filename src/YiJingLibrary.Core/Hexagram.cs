@@ -29,6 +29,9 @@ public partial class Hexagram : Trigram
     {
         get
         {
+            if (LineList.Count != 6)
+                throw new InvalidOperationException("The hexagram is not initialized.");
+            
             return index switch
             {
                 1 => LineList[0],

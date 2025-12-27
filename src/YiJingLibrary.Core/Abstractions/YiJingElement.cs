@@ -53,7 +53,7 @@ public abstract class YiJingElement : IEquatable<YiJingElement>
     /// <inheritdoc />
     public override int GetHashCode()
     {
-        return Value.GetHashCode();
+        return HashCode.Combine(Value, GetType());
     }
 
     /// <inheritdoc />

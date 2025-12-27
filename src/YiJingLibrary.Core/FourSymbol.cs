@@ -14,7 +14,7 @@ public sealed class FourSymbol : YiJingElement
     }
     
     /// <summary>
-    /// 老阳。
+    /// 老阴。
     /// </summary>
     public static readonly FourSymbol OldYin = new(6, nameof(OldYin));
     

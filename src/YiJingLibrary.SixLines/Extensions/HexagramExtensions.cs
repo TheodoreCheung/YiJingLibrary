@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using YiJingLibrary.Core;
 
@@ -169,5 +171,57 @@ public static class HexagramExtensions
                        (hexagram & 0b0100_0000) >> 6)
             );
         }
+
+        /// <summary>
+        /// 获取内卦三个爻的干支。
+        /// </summary>
+        /// <returns>从初爻到三爻的干支。</returns>
+        public IEnumerable<StemBranch> LowerStemBranches()
+        {
+            var (stem, branches) = LowerStemBranchDic[hexagram.Lower];
+            return branches.Select(b => new StemBranch(stem, b));
+        }
+        
+        /// <summary>
+        /// 获取外卦三个爻的干支。
+        /// </summary>
+        /// <returns>从四爻到上爻的干支。</returns>
+        public IEnumerable<StemBranch> UpperStemBranches()
+        {
+            var (stem, branches) = UpperStemBranchDic[hexagram.Upper];
+            return branches.Select(b => new StemBranch(stem, b));
+        }
     }
+
+    /// <summary>
+    /// 内卦纳甲字典。
+    /// </summary>
+    private static readonly ReadOnlyDictionary<Trigram, (HeavenlyStem Stem, EarthlyBranch[] Branches)>
+        LowerStemBranchDic = new Dictionary<Trigram, (HeavenlyStem Stem, EarthlyBranch[] Branches)>
+        {
+            { Trigram.Qian, (HeavenlyStem.Jia, [EarthlyBranch.Zi, EarthlyBranch.Yin, EarthlyBranch.Chen]) },
+            { Trigram.Zhen, (HeavenlyStem.Geng, [EarthlyBranch.Zi, EarthlyBranch.Yin, EarthlyBranch.Chen]) },
+            { Trigram.Kan, (HeavenlyStem.Wu, [EarthlyBranch.Yin, EarthlyBranch.Chen, EarthlyBranch.Wu]) },
+            { Trigram.Gen, (HeavenlyStem.Bing, [EarthlyBranch.Chen, EarthlyBranch.Wu, EarthlyBranch.Shen]) },
+            { Trigram.Kun, (HeavenlyStem.Yi, [EarthlyBranch.Wei, EarthlyBranch.Si, EarthlyBranch.Mao]) },
+            { Trigram.Xun, (HeavenlyStem.Xin, [EarthlyBranch.Chou, EarthlyBranch.Hai, EarthlyBranch.You]) },
+            { Trigram.Li, (HeavenlyStem.Ji, [EarthlyBranch.Mao, EarthlyBranch.Chou, EarthlyBranch.Hai]) },
+            { Trigram.Dui, (HeavenlyStem.Ding, [EarthlyBranch.Si, EarthlyBranch.Mao, EarthlyBranch.Chou]) },
+        }.AsReadOnly();
+    
+    /// <summary>
+    /// 外卦纳甲字典。
+    /// </summary>
+    private static readonly ReadOnlyDictionary<Trigram, (HeavenlyStem Stem, EarthlyBranch[] Branches)>
+        UpperStemBranchDic = new Dictionary<Trigram, (HeavenlyStem Stem, EarthlyBranch[] Branches)>
+        {
+            { Trigram.Qian, (HeavenlyStem.Ren, [EarthlyBranch.Wu, EarthlyBranch.Shen, EarthlyBranch.Xu]) },
+            { Trigram.Zhen, (HeavenlyStem.Geng, [EarthlyBranch.Wu, EarthlyBranch.Shen, EarthlyBranch.Xu]) },
+            { Trigram.Kan, (HeavenlyStem.Wu, [EarthlyBranch.Shen, EarthlyBranch.Xu, EarthlyBranch.Zi]) },
+            { Trigram.Gen, (HeavenlyStem.Bing, [EarthlyBranch.Xu, EarthlyBranch.Zi, EarthlyBranch.Yin]) },
+            { Trigram.Kun, (HeavenlyStem.Gui, [EarthlyBranch.Chou, EarthlyBranch.Hai, EarthlyBranch.You]) },
+            { Trigram.Xun, (HeavenlyStem.Xin, [EarthlyBranch.Wei, EarthlyBranch.Si, EarthlyBranch.Mao]) },
+            { Trigram.Li, (HeavenlyStem.Ji, [EarthlyBranch.You, EarthlyBranch.Wei, EarthlyBranch.Si]) },
+            { Trigram.Dui, (HeavenlyStem.Ding, [EarthlyBranch.Hai, EarthlyBranch.You, EarthlyBranch.Wei]) },
+        }.AsReadOnly();
 }

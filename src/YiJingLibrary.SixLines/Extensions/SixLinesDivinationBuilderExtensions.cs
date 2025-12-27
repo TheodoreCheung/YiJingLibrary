@@ -165,118 +165,18 @@ public static class SixLinesDivinationBuilderExtensions
         private static void AssignStemBranch(Hexagram hexagram)
         {
             // 内卦
-            if (hexagram.Lower.Equals(Trigram.Qian))
+            _ = hexagram.LowerStemBranches().Aggregate(1, (lineIndex, stemBranch) =>
             {
-                hexagram[1].StemBranch = new StemBranch(HeavenlyStem.Jia, EarthlyBranch.Zi);
-                hexagram[2].StemBranch = new StemBranch(HeavenlyStem.Jia, EarthlyBranch.Yin);
-                hexagram[3].StemBranch = new StemBranch(HeavenlyStem.Jia, EarthlyBranch.Chen);
-            }
-
-            if (hexagram.Lower.Equals(Trigram.Zhen))
-            {
-                hexagram[1].StemBranch = new StemBranch(HeavenlyStem.Geng, EarthlyBranch.Zi);
-                hexagram[2].StemBranch = new StemBranch(HeavenlyStem.Geng, EarthlyBranch.Yin);
-                hexagram[3].StemBranch = new StemBranch(HeavenlyStem.Geng, EarthlyBranch.Chen);
-            }
-
-            if (hexagram.Lower.Equals(Trigram.Kan))
-            {
-                hexagram[1].StemBranch = new StemBranch(HeavenlyStem.Wu, EarthlyBranch.Yin);
-                hexagram[2].StemBranch = new StemBranch(HeavenlyStem.Wu, EarthlyBranch.Chen);
-                hexagram[3].StemBranch = new StemBranch(HeavenlyStem.Wu, EarthlyBranch.Wu);
-            }
-
-            if (hexagram.Lower.Equals(Trigram.Gen))
-            {
-                hexagram[1].StemBranch = new StemBranch(HeavenlyStem.Bing, EarthlyBranch.Chen);
-                hexagram[2].StemBranch = new StemBranch(HeavenlyStem.Bing, EarthlyBranch.Wu);
-                hexagram[3].StemBranch = new StemBranch(HeavenlyStem.Bing, EarthlyBranch.Shen);
-            }
-
-            if (hexagram.Lower.Equals(Trigram.Kun))
-            {
-                hexagram[1].StemBranch = new StemBranch(HeavenlyStem.Yi, EarthlyBranch.Wei);
-                hexagram[2].StemBranch = new StemBranch(HeavenlyStem.Yi, EarthlyBranch.Si);
-                hexagram[3].StemBranch = new StemBranch(HeavenlyStem.Yi, EarthlyBranch.Mao);
-            }
-
-            if (hexagram.Lower.Equals(Trigram.Xun))
-            {
-                hexagram[1].StemBranch = new StemBranch(HeavenlyStem.Xin, EarthlyBranch.Chou);
-                hexagram[2].StemBranch = new StemBranch(HeavenlyStem.Xin, EarthlyBranch.Hai);
-                hexagram[3].StemBranch = new StemBranch(HeavenlyStem.Xin, EarthlyBranch.You);
-            }
-
-            if (hexagram.Lower.Equals(Trigram.Li))
-            {
-                hexagram[1].StemBranch = new StemBranch(HeavenlyStem.Ji, EarthlyBranch.Mao);
-                hexagram[2].StemBranch = new StemBranch(HeavenlyStem.Ji, EarthlyBranch.Chou);
-                hexagram[3].StemBranch = new StemBranch(HeavenlyStem.Ji, EarthlyBranch.Hai);
-            }
-
-            if (hexagram.Lower.Equals(Trigram.Dui))
-            {
-                hexagram[1].StemBranch = new StemBranch(HeavenlyStem.Ding, EarthlyBranch.Si);
-                hexagram[2].StemBranch = new StemBranch(HeavenlyStem.Ding, EarthlyBranch.Mao);
-                hexagram[3].StemBranch = new StemBranch(HeavenlyStem.Ding, EarthlyBranch.Chou);
-            }
-
+                hexagram[(byte)lineIndex].StemBranch = stemBranch;
+                return lineIndex + 1;
+            });
+            
             // 外卦
-            if (hexagram.Upper.Equals(Trigram.Qian))
+            _ = hexagram.UpperStemBranches().Aggregate(4, (lineIndex, stemBranch) =>
             {
-                hexagram[4].StemBranch = new StemBranch(HeavenlyStem.Ren, EarthlyBranch.Wu);
-                hexagram[5].StemBranch = new StemBranch(HeavenlyStem.Ren, EarthlyBranch.Shen);
-                hexagram[6].StemBranch = new StemBranch(HeavenlyStem.Ren, EarthlyBranch.Xu);
-            }
-
-            if (hexagram.Upper.Equals(Trigram.Zhen))
-            {
-                hexagram[4].StemBranch = new StemBranch(HeavenlyStem.Geng, EarthlyBranch.Wu);
-                hexagram[5].StemBranch = new StemBranch(HeavenlyStem.Geng, EarthlyBranch.Shen);
-                hexagram[6].StemBranch = new StemBranch(HeavenlyStem.Geng, EarthlyBranch.Xu);
-            }
-
-            if (hexagram.Upper.Equals(Trigram.Kan))
-            {
-                hexagram[4].StemBranch = new StemBranch(HeavenlyStem.Wu, EarthlyBranch.Shen);
-                hexagram[5].StemBranch = new StemBranch(HeavenlyStem.Wu, EarthlyBranch.Xu);
-                hexagram[6].StemBranch = new StemBranch(HeavenlyStem.Wu, EarthlyBranch.Zi);
-            }
-
-            if (hexagram.Upper.Equals(Trigram.Gen))
-            {
-                hexagram[4].StemBranch = new StemBranch(HeavenlyStem.Bing, EarthlyBranch.Xu);
-                hexagram[5].StemBranch = new StemBranch(HeavenlyStem.Bing, EarthlyBranch.Zi);
-                hexagram[6].StemBranch = new StemBranch(HeavenlyStem.Bing, EarthlyBranch.Yin);
-            }
-
-            if (hexagram.Upper.Equals(Trigram.Kun))
-            {
-                hexagram[4].StemBranch = new StemBranch(HeavenlyStem.Gui, EarthlyBranch.Chou);
-                hexagram[5].StemBranch = new StemBranch(HeavenlyStem.Gui, EarthlyBranch.Hai);
-                hexagram[6].StemBranch = new StemBranch(HeavenlyStem.Gui, EarthlyBranch.You);
-            }
-
-            if (hexagram.Upper.Equals(Trigram.Xun))
-            {
-                hexagram[4].StemBranch = new StemBranch(HeavenlyStem.Xin, EarthlyBranch.Wei);
-                hexagram[5].StemBranch = new StemBranch(HeavenlyStem.Xin, EarthlyBranch.Si);
-                hexagram[6].StemBranch = new StemBranch(HeavenlyStem.Xin, EarthlyBranch.Mao);
-            }
-
-            if (hexagram.Upper.Equals(Trigram.Li))
-            {
-                hexagram[4].StemBranch = new StemBranch(HeavenlyStem.Ji, EarthlyBranch.You);
-                hexagram[5].StemBranch = new StemBranch(HeavenlyStem.Ji, EarthlyBranch.Wei);
-                hexagram[6].StemBranch = new StemBranch(HeavenlyStem.Ji, EarthlyBranch.Si);
-            }
-
-            if (hexagram.Upper.Equals(Trigram.Dui))
-            {
-                hexagram[4].StemBranch = new StemBranch(HeavenlyStem.Ding, EarthlyBranch.Hai);
-                hexagram[5].StemBranch = new StemBranch(HeavenlyStem.Ding, EarthlyBranch.You);
-                hexagram[6].StemBranch = new StemBranch(HeavenlyStem.Ding, EarthlyBranch.Wei);
-            }
+                hexagram[(byte)lineIndex].StemBranch = stemBranch;
+                return lineIndex + 1;
+            });
         }
 
         /// <summary>

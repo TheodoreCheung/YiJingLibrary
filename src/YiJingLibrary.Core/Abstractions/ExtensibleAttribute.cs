@@ -45,6 +45,23 @@ public class ExtensibleAttribute
     
         return null;
     }
+    
+    /// <summary>
+    /// 尝试获取指定类型的扩展属性。
+    /// </summary>
+    /// <param name="result">如果成功获取，则返回指定类型的扩展属性；否则返回null。</param>
+    /// <typeparam name="T"><see cref="YiJingElement"/>的派生类。</typeparam>
+    /// <returns>返回是否成功获取指定类型的扩展属性。</returns>
+    public bool TryGet<T>(out T? result) where T : YiJingElement
+    {
+        if (_attributes.TryGetValue(typeof(T).Name, out var attribute))
+        {
+            result = (T)attribute;
+            return true;
+        }
+        result = null;
+        return false;
+    }
 
     /// <summary>
     /// 根据属性名称获取扩展属性。
